@@ -1,0 +1,26 @@
+- hosts: all
+  become: yes
+
+  tasks:
+   - name: install remote apt deps
+     apt:
+       name: ['apt-transport-https', 'ca-certificates', 'gnupg2', 'software-properties-common']
+       state: present
+       update_cache: true
+
+   - name: add Docker apt-key
+     apt_key:
+       url: https://download.docker.com/linux/ubuntu/gpg
+       state: present
+
+   - name: add Docker's APT repository
+     apt_repository:
+      repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+      state: present
+      filename: 'docker'
+
+   - name: install Docker
+     apt:
+       name: docker-ce
+       state: present
+       update_cache: true

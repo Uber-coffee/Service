@@ -1,0 +1,2 @@
+ansible_user: {{ lookup('env', 'EPAM_USERNAME') }}
+ansible_ssh_pass: {{ lookup('env', 'EPAM_PASSWORD') }}

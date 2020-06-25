@@ -1,0 +1,5 @@
+all:
+  hosts:
+    ecse005008f0.epam.com:
+    ecse005008ef.epam.com:
+    ecse005008ee.epam.com:
