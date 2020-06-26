@@ -33,7 +33,7 @@
   
   tasks:
     - name: join managers
-      shell: "{{ hostvars['managers'].join_command_manager }} > joined.txt"
+      shell: "{{ hostvars[groups['managers'][0]].join_command_manager }} > joined.txt"
       args:
         chdir: $HOME
         creates: joined.txt
@@ -43,7 +43,7 @@
   
   tasks:
     - name: join workers
-      shell: "{{ hostvars['managers'].join_command_worker }} > joined.txt"
+      shell: "{{ hostvars[groups['managers'][0]].join_command_worker }} > joined.txt"
       args:
         chdir: $HOME
         creates: joined.txt
