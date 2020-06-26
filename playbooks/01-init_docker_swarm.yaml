@@ -1,3 +1,4 @@
+---
 - hosts: managers[0]
   become: yes
 
