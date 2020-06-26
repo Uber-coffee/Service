@@ -4,7 +4,7 @@
   tasks:
    - name: install remote apt deps
      apt:
-       name: ['apt-transport-https', 'ca-certificates', 'gnupg2', 'software-properties-common']
+       name: ['apt-transport-https', 'ca-certificates', 'gnupg2', 'software-properties-common', 'net-tools']
        state: present
        update_cache: true
 
