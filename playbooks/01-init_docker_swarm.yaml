@@ -4,36 +4,36 @@
 
   tasks:
    - name: initialize the cluster
-      shell: docker swarm init --advertise-addr {{ ansible_facts.eth0.ipv4.address }} > initialized.txt
-      args:
-        chdir: $HOME
-        creates: initialized.txt
+     shell: "docker swarm init --advertise-addr {{ ansible_facts.eth0.ipv4.address }} > initialized.txt"
+     args:
+       chdir: $HOME
+       creates: initialized.txt
 
    - name: get join manager command
-      shell: docker swarm join-token manager | grep 'docker swarm join --token'
-      register: join_command_manager_raw
+     shell: "docker swarm join-token manager | grep 'docker swarm join --token'"
+     register: join_command_manager_raw
       
     - name: set join manager command
       set_fact:
         join_command_manager: "{{ join_command_manager_raw.stdout_lines[0] | trim }}"
    
    - name: get join worker command
-      shell: docker swarm join-token worker | grep 'docker swarm join --token'
-      register: join_command_worker_raw
+     shell: "docker swarm join-token worker | grep 'docker swarm join --token'"
+     register: join_command_worker_raw
         
    - name: set join worker command
-      set_fact:
-        join_command_worker: "{{ join_command_worker_raw.stdout_lines[0] | trim }}"
+     set_fact:
+       join_command_worker: "{{ join_command_worker_raw.stdout_lines[0] | trim }}"
         
    - debug:
-     msg: Command for manager join: {{ join_command_manager }}
+     msg: "Command for manager join: {{ join_command_manager }}"
      
 - hosts: managers[1:]
   become: yes
   
   tasks:
     - name: join managers
-      shell: {{ hostvars['managers'].join_command_manager }} > joined.txt
+      shell: "{{ hostvars['managers'].join_command_manager }} > joined.txt"
       args:
         chdir: $HOME
         creates: joined.txt
@@ -43,7 +43,7 @@
   
   tasks:
     - name: join workers
-      shell: {{ hostvars['managers'].join_command_worker }} > joined.txt
+      shell: "{{ hostvars['managers'].join_command_worker }} > joined.txt"
       args:
         chdir: $HOME
         creates: joined.txt
