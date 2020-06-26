@@ -4,7 +4,7 @@
 
   tasks:
    - name: initialize the cluster
-     shell: "docker swarm init --advertise-addr {{ ansible_facts.eth0.ipv4.address }} > initialized.txt"
+     shell: "docker swarm init --advertise-addr {{ ansible_facts.enp1s0.ipv4.address }} > initialized.txt"
      args:
        chdir: $HOME
        creates: initialized.txt
