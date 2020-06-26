@@ -26,7 +26,7 @@
        join_command_worker: "{{ join_command_worker_raw.stdout_lines[0] | trim }}"
         
    - debug:
-     msg: "Command for manager join: {{ join_command_manager }}"
+       msg: "Command for manager join: {{ join_command_manager }}"
      
 - hosts: managers[1:]
   become: yes
