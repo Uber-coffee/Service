@@ -1,0 +1,7 @@
+---
+- hosts: managers[0]
+  become: yes
+  
+  tasks:
+    - name: create registry service
+      shell: "docker service create --name registry --network net_dev --publish 5000:5000 registry:2.7"

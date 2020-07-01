@@ -1,0 +1,10 @@
+---
+- hosts: managers[0]
+  become: yes
+  
+  tasks:
+    - name: create dev network
+      shell: "docker network create -d overlay net_dev"
+    
+    - name: create prod network
+      shell: "docker network create -d overlay net_prod"
